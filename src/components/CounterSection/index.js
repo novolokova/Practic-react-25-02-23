@@ -14,6 +14,7 @@ class CounterSection extends Component {
     if (target.value < maxStep)
       this.setState({ step: target.value.replace(/[^0-9 .]/g, "") });
   };
+
   render() {
     const { step } = this.state;
     return (

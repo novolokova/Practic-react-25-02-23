@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AutoClick from "../AutoClick";
 
 class Counter extends Component {
   constructor(props) {
@@ -8,9 +9,10 @@ class Counter extends Component {
       isAdd: true,
     };
   }
-
+  resetCount = () => {
+    this.setState({ count: 0 });
+  };
   changeHandler = () => {
-    // const { step } = this.props;
     if (this.state.isAdd) {
       this.setState({ count: this.state.count + Number(this.props.step) });
     } else {
@@ -22,7 +24,6 @@ class Counter extends Component {
   };
 
   render() {
-   
     const { count, isAdd } = this.state;
     const changeMode = isAdd ? "Add +" : "Sub -";
 
@@ -33,6 +34,10 @@ class Counter extends Component {
           <button onClick={this.changeHandler}>{changeMode}</button>
           <button onClick={this.clickHandler}>change mode</button>
         </div>
+        <AutoClick
+          changeHandler={this.changeHandler}
+          resetCount={this.resetCount}
+        />
       </article>
     );
   }
