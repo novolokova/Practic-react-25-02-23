@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AutoClick from "../AutoClick";
+import styles from "./Counter.module.css";
 
 class Counter extends Component {
   constructor(props) {
@@ -28,17 +29,26 @@ class Counter extends Component {
     const changeMode = isAdd ? "Add +" : "Sub -";
 
     return (
-      <article>
-        <h2>{count}</h2>
+      <>
         <div>
-          <button onClick={this.changeHandler}>{changeMode}</button>
-          <button onClick={this.clickHandler}>change mode</button>
+          <AutoClick
+            changeHandler={this.changeHandler}
+            resetCount={this.resetCount}
+            resetStep={this.props.resetStep}
+          />
         </div>
-        <AutoClick
-          changeHandler={this.changeHandler}
-          resetCount={this.resetCount}
-        />
-      </article>
+        <div>
+          <article>
+            <p className={styles.h2}>{count}</p>
+          </article>
+          <button className={styles.btn} onClick={this.changeHandler}>
+            {changeMode}
+          </button>
+          <button className={styles.btn} onClick={this.clickHandler}>
+            change mode
+          </button>
+        </div>
+      </>
     );
   }
 }

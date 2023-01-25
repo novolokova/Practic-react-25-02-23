@@ -1,0 +1,13 @@
+.h2 {
+    width: 100%;
+    font-size: 70px;
+    background-color: rgb(159, 163, 151);
+}
+
+.btn {
+    width: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0 25px;
+    font-weight: bold;
+}

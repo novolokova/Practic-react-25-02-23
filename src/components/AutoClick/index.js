@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./AutoClick.module.css";
 
 class AutoClick extends Component {
   constructor(props) {
@@ -10,14 +11,12 @@ class AutoClick extends Component {
     this.intervalId = null;
     this.timelId = null;
   }
-
   tisk = () => {
     const { time } = this.state;
     const newTime = new Date(time);
     newTime.setSeconds(newTime.getSeconds() + 1);
     this.setState({ time: newTime });
   };
-
   start = () => {
     const { changeHandler } = this.props;
     if (this.intervalId === null) {
@@ -26,7 +25,6 @@ class AutoClick extends Component {
     }
     this.setState({ mess: "" });
   };
-
   stop = () => {
     clearInterval(this.intervalId);
     clearInterval(this.timelId);
@@ -37,22 +35,30 @@ class AutoClick extends Component {
     this.setState({ mess: message });
   };
   reset = () => {
+    this.stop();
+    this.props.resetCount();
     this.setState({ time: new Date(0, 0, 0, 0, 0, 0, 0) });
     this.props.resetCount();
-    this.stop();
+    this.props.resetStep();
+    this.setState({ mess: "" });
   };
-
   componentWillUnmount() {
     this.stop();
   }
 
   render() {
     return (
-      <div>
+      <div className={styles.autoClick}>
         <h2>AutoClick {this.state.mess}</h2>
-        <button onClick={this.start}>start</button>
-        <button onClick={this.stop}>stop</button>
-        <button onClick={this.reset}>reset</button>
+        <button className={styles.btn} onClick={this.start}>
+          start
+        </button>
+        <button className={styles.btn} onClick={this.stop}>
+          stop
+        </button>
+        <button className={styles.btn} onClick={this.reset}>
+          reset
+        </button>
       </div>
     );
   }

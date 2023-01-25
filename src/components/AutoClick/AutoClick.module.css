@@ -1,0 +1,11 @@
+.autoClick {
+    padding: 1em;
+}
+
+.btn {
+    width: 80px;
+    height: 30px;
+    margin: 0 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
