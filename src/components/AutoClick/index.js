@@ -6,16 +6,22 @@ class AutoClick extends Component {
     super(props);
     this.state = {
       time: new Date(0, 0, 0, 0, 0, 0, 0),
+      timeEnd: new Date(0, 0, 0, 0, 0, 30, 0),
       mess: "",
     };
     this.intervalId = null;
     this.timelId = null;
   }
   tisk = () => {
-    const { time } = this.state;
-    const newTime = new Date(time);
-    newTime.setSeconds(newTime.getSeconds() + 1);
-    this.setState({ time: newTime });
+    const { time, timeEnd } = this.state;
+    if (time < timeEnd) {
+      const newTime = new Date(time);
+      newTime.setSeconds(newTime.getSeconds() + 1);
+      this.setState({ time: newTime });
+    } else {
+      this.stop();
+      this.setState({ mess: `Time is over: ${time.toLocaleTimeString("en-GB")}` });
+    }
   };
   start = () => {
     const { changeHandler } = this.props;
