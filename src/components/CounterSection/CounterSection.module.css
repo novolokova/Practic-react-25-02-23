@@ -1,9 +1,10 @@
-.container{
+.container {
     width: 50%;
-    height: 80vh;
+    height: 600px;
+    max-height: 700px;
     margin: auto;
-    margin-top: 30px;;
-    color:rgb(30, 29, 31);
+    margin-top: 30px;
+    color: rgb(30, 29, 31);
     border: 2px solid rgb(17, 17, 17);
     border-radius: 15px;
     background-color: rgb(118, 124, 124);

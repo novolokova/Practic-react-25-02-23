@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { format, add } from "date-fns";
+
 import styles from "./AutoClick.module.css";
 
 class AutoClick extends Component {
@@ -6,28 +8,29 @@ class AutoClick extends Component {
     super(props);
     this.state = {
       time: new Date(0, 0, 0, 0, 0, 0, 0),
-      timeEnd: new Date(0, 0, 0, 0, 0, 30, 0),
       mess: "",
     };
+    this.timeEnd = new Date(0, 0, 0, 0, 0, 30, 0);
     this.intervalId = null;
     this.timelId = null;
   }
-  tisk = () => {
-    const { time, timeEnd } = this.state;
-    if (time < timeEnd) {
-      const newTime = new Date(time);
-      newTime.setSeconds(newTime.getSeconds() + 1);
-      this.setState({ time: newTime });
+
+  tick = () => {
+    const { time } = this.state;
+    if (time < this.timeEnd) {
+      this.setState((state) => {
+        return { time: add(state.time, { seconds: 1 }) };
+      });
     } else {
       this.stop();
-      this.setState({ mess: `Time is over: ${time.toLocaleTimeString("en-GB")}` });
+      this.setState({ mess: `Time is over: ` });
     }
   };
   start = () => {
     const { changeHandler } = this.props;
     if (this.intervalId === null) {
       this.intervalId = setInterval(changeHandler, 1000);
-      this.timelId = setInterval(this.tisk, 1000);
+      this.timelId = setInterval(this.tick, 1000);
     }
     this.setState({ mess: "" });
   };
@@ -36,9 +39,6 @@ class AutoClick extends Component {
     clearInterval(this.timelId);
     this.intervalId = null;
     this.timelId = null;
-    const { time } = this.state;
-    const message = `Your time: ${time.toLocaleTimeString("en-GB")}`;
-    this.setState({ mess: message });
   };
   reset = () => {
     this.stop();
@@ -51,11 +51,14 @@ class AutoClick extends Component {
   componentWillUnmount() {
     this.stop();
   }
-
   render() {
     return (
       <div className={styles.autoClick}>
-        <h2>AutoClick {this.state.mess}</h2>
+        <h2>AutoClick </h2>
+        <h2>
+          {this.state.mess}
+          {format(this.state.time, "HH:mm:ss")}
+        </h2>
         <button className={styles.btn} onClick={this.start}>
           start
         </button>
