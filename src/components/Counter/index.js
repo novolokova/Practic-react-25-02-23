@@ -14,6 +14,7 @@ class Counter extends Component {
     this.setState({ count: 0 });
   };
   changeHandler = () => {
+    
     if (this.state.isAdd) {
       this.setState({ count: this.state.count + Number(this.props.step) });
     } else {
