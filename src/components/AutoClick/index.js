@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import { format, add } from "date-fns";
+import PropTypes from "prop-types";
+import { TIME_END, CONST_INTERVAL } from "../../constants";
 import styles from "./AutoClick.module.css";
 
 class AutoClick extends Component {
+  /**
+   * 
+   * @param {*} props 
+   * @param {function} props.resetStep
+   * @param {function} props.resetCount
+   * @param {function} props.changeHandler
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -10,8 +19,6 @@ class AutoClick extends Component {
       mess: "",
       intervalStep: 1000,
     };
-    this.intervalConst = 1000;
-    this.timeEnd = new Date(0, 0, 0, 0, 0, 30, 0);
     this.intervalId = null;
     this.timeId = null;
     this.options = [
@@ -24,9 +31,9 @@ class AutoClick extends Component {
       { label: "2.5", value: 0.4 },
     ];
   }
-  
+
   tick = () => {
-      if (this.state.time < this.timeEnd) {
+    if (this.state.time < TIME_END) {
       this.setState((state) => {
         return { time: add(state.time, { seconds: 1 }) };
       });
@@ -35,14 +42,15 @@ class AutoClick extends Component {
       this.setState({ mess: `Time is over: ` });
     }
   };
+
   start = () => {
     const { changeHandler } = this.props;
     if (this.intervalId === null) {
       this.intervalId = setInterval(changeHandler, this.state.intervalStep);
       this.timeId = setInterval(this.tick, 1000);
     }
-   
   };
+
   stop = () => {
     clearInterval(this.intervalId);
     clearInterval(this.timeId);
@@ -51,27 +59,27 @@ class AutoClick extends Component {
   };
 
   reset = () => {
+    const { resetCount, resetStep } = this.props;
     this.stop();
-    this.props.resetCount();
     this.setState({ time: new Date(0, 0, 0, 0, 0, 0, 0) });
-    this.props.resetCount();
-    this.props.resetStep();
+    resetCount();
+    resetStep();
     this.setState({ mess: "" });
   };
 
   handleChange = ({ target }) => {
     this.setState({ value: target.value });
-    this.setState({ intervalStep: this.intervalConst * target.value });
+    this.setState({ intervalStep: CONST_INTERVAL * target.value });
   };
 
   componentWillUnmount() {
     this.stop();
   }
   render() {
-    const{time, mess, options:value} = this.state;
+    const { time, mess, options: value } = this.state;
     return (
       <div className={styles.autoClick}>
-        <h2>AutoClick </h2>
+        <h2>AutoClick</h2>
         <h2>
           {mess}
           {format(time, "HH:mm:ss")}
@@ -85,19 +93,31 @@ class AutoClick extends Component {
         <button className={styles.btn} onClick={this.reset}>
           reset
         </button>
-        <div>
+        <div className={styles.select}>
           <label> Speed </label>
-            <select value={value} onChange={this.handleChange}>
-              {this.options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+          <select value={value} onChange={this.handleChange}>
+            {this.options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     );
   }
+}
+
+AutoClick.propTypes = {
+  resetStep: PropTypes.func,
+  resetCount: PropTypes.func,
+  changeHandler: PropTypes.func,
+};
+
+AutoClick.defaultProps = {
+  resetStep: ()=>{},
+  resetCount: ()=>{},
+  changeHandler: ()=>{},
 }
 
 export default AutoClick;

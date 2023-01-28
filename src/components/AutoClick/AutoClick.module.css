@@ -1,5 +1,5 @@
 .autoClick {
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .btn {
@@ -8,4 +8,7 @@
     margin: 0 10px;
     border-radius: 10px;
     font-weight: bold;
+}
+.select{
+     margin-top: 15px;
 }
