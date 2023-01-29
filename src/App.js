@@ -1,10 +1,7 @@
-
-import CounterSection from './components/CounterSection/index';
+import CounterSection from "./components/CounterSection";
 
 function App() {
-  return (
-    <CounterSection/>
-  );
+  return <CounterSection />;
 }
 
 export default App;

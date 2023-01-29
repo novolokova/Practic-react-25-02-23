@@ -1,0 +1,17 @@
+@mixin border-style($size, $color, $style) {
+    border: {
+    width: $size;
+    color: $color;
+    style: $style;
+
+    }
+  }
+  
+  @mixin btn-style($width, $height, $padding, $top-bot, $left-r, $weight){
+    width: $width;
+    height: $height;
+    padding: $padding;
+    margin: $top-bot $left-r;
+    font-weight: $weight;
+  }
+  
