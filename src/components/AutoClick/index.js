@@ -6,8 +6,8 @@ import styles from "./AutoClick.module.scss";
 
 class AutoClick extends Component {
   /**
-   * 
-   * @param {*} props 
+   *
+   * @param {*} props
    * @param {function} props.resetStep
    * @param {function} props.resetCount
    * @param {function} props.changeHandler
@@ -115,9 +115,9 @@ AutoClick.propTypes = {
 };
 
 AutoClick.defaultProps = {
-  resetStep: ()=>{},
-  resetCount: ()=>{},
-  changeHandler: ()=>{},
-}
+  resetStep: () => {},
+  resetCount: () => {},
+  changeHandler: () => {},
+};
 
 export default AutoClick;

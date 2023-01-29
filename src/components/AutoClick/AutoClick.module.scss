@@ -3,15 +3,15 @@
 @use "src/common/styles/mixins" as mixin;
 
 .autoClick {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
 .btn {
-    @include mixin.btn-style(80px, 30px, null, 0, 10px, bold);
-    @include mixin.border-style(1px, color.$text-color, solid);
-    border-radius: border.$b-Radius;
-    color: color.$text-color;
+  @include mixin.btn-style(80px, 30px, null, 0, 10px, bold);
+  @include mixin.border-style(1px, color.$text-color, solid);
+  border-radius: border.$b-Radius;
+  color: color.$text-color;
 }
-.select{
-     margin-top: 15px;
+.select {
+  margin-top: 15px;
 }

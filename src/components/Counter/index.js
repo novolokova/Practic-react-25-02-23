@@ -53,11 +53,9 @@ Counter.defaultProps = {
   count: 0,
   step: 1,
   isAdd: true,
-  stepHandler: ()=>{},
-  changeHandler: ()=>{},
-  clickHandler: ()=>{},
-}
-
-
+  stepHandler: () => {},
+  changeHandler: () => {},
+  clickHandler: () => {},
+};
 
 export default Counter;
