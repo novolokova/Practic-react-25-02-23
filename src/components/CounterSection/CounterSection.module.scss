@@ -1,0 +1,19 @@
+@use "src/common/styles/colors" as color;
+@use "src/common/styles/borders" as border;
+@use "src/common/styles/mixins" as mixin;
+
+.container {
+  max-width: 320px;
+  min-height: 500px;
+  height: 500px;
+  max-height: 700px;
+  margin: auto;
+  margin-top: 30px;
+  color: color.$text-color;
+  @include mixin.border-style(3px, color.$text-color, solid);
+  border-radius: border.$b-Radius;
+  background-color: rgb(118, 124, 124);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}

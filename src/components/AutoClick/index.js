@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { format, add } from "date-fns";
 import PropTypes from "prop-types";
 import { TIME_END, CONST_INTERVAL } from "../../constants";
-import styles from "./AutoClick.module.css";
+import styles from "./AutoClick.module.scss";
 
 class AutoClick extends Component {
   /**

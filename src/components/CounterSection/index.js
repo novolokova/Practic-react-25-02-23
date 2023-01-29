@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { MIN_STEP, MAX_STEP } from "../../constants";
 import AutoClick from "../AutoClick";
 import Counter from "../Counter";
-import styles from "./CounterSection.module.css";
+import styles from "./CounterSection.module.scss";
 
 class CounterSection extends Component {
   constructor(props) {
